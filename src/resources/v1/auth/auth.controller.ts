@@ -24,7 +24,13 @@ export class UserController extends MainController {
     public login(req: Request, res: Response) {
         const { body: { email, password } } = req
         return asyncWrapper(res, async () => {
-            const user = await User.findOne({ where: { email } })
+            const user = await User.findOne({
+                where: { email }, include: [
+                    {
+                        model: Preference,
+                        as: "preferences"
+                    }
+                ] })
             if (!user || !Encrypt.decrypt(password, user.password)) {
                 return responseWrapper({
                     res,
@@ -39,7 +45,7 @@ export class UserController extends MainController {
             });
             const token = JwtToken.generateToken({
                 id: user.id,
-                name: user.name
+                email: user.email
             });
             return responseWrapper({
                 res,
@@ -105,7 +111,7 @@ export class UserController extends MainController {
         const { body: { email } } = req
         return asyncWrapper(res, async () => {
             const user = await User.findOne({ where: { email } })
-            if (!user) {
+            if (!user || user.verified) {
                 return responseWrapper({
                     res,
                     status: BAD_REQUEST,
@@ -119,6 +125,17 @@ export class UserController extends MainController {
                 status: OK,
                 message: 'Account verified successfully',
                 data: user,
+            });
+        });
+    }
+    public userInfor(req: Request, res: Response) {
+        const { currentUser } = req
+        return asyncWrapper(res, async () => {
+            return responseWrapper({
+                res,
+                status: OK,
+                message: 'Account information',
+                data: await currentUser,
             });
         });
     }
