@@ -1,0 +1,11 @@
+require("dotenv").config();
+const path = require("path");
+
+const dbConfig = path.join(__dirname, "src","database");
+
+module.exports = {
+  config: path.join(dbConfig, "config", "config.json"),
+  "models-path": path.join(dbConfig, "models"),
+  "seeders-path": path.join(dbConfig, "seeders"),
+  "migrations-path": path.join(dbConfig, "migrations"),
+};
