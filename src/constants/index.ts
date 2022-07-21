@@ -17,3 +17,5 @@ export const SERVICE_UNAVAILABLE = 503;
 export const CONFLICT = 409;
 export const ACCESS_DENIED = 403;
 
+
+export const validateEmail = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
