@@ -1,7 +1,7 @@
-import { defaultLanguage } from '../constants/shared';
 import en from './en';
 import rw from './rw';
 import fr from './fr';
+import { defaultLanguage } from '../constants';
 
 interface ILocale {
   [index: string]: any;
