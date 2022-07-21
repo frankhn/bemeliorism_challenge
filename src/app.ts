@@ -2,7 +2,7 @@ import express, { Application, Request, Response, NextFunction } from 'express';
 import cors from 'cors';
 import path from 'path';
 
-import * as statusCodes from './constants/statusCodes';
+import { BAD_REQUEST } from './constants';
 import joiErrors from './middleware/celebrateErrors';
 import './database/models/asociations';
 import morganMiddleware from './services/morgin.service';
@@ -30,8 +30,8 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 
   if (req.method === 'OPTIONS') {
     res.header('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE');
-    return res.status(statusCodes.BAD_REQUEST).json({
-      status: statusCodes.BAD_REQUEST,
+    return res.status(BAD_REQUEST).json({
+      status: BAD_REQUEST,
       accepted: 'PUT, POST, GET, DELETE',
     });
   }
@@ -54,8 +54,8 @@ app.use('/docs', swaggerUI.serve, swaggerUI.setup(docs));
 app.use(joiErrors());
 
 app.use((req: Request, res: Response) => {
-  res.status(statusCodes.BAD_REQUEST).json({
-    status: statusCodes.BAD_REQUEST,
+  res.status(BAD_REQUEST).json({
+    status: BAD_REQUEST,
     message: 'Refer to the document => /api/v1/docs',
   });
 });
