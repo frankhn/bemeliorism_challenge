@@ -7,9 +7,12 @@ import Encrypt from '../../helpers/encryption'
 
 export class User extends Model {
   public id: string;
-  public firstName: string;
-  public lastName: string;
+  public name: string;
+  public email: string;
   public password: string;
+  public verified: boolean
+  public verificationCode: string
+  public dateOfBirth: Date
 
   public readonly createdAt: Date
   public readonly updatedAt: Date
@@ -34,14 +37,27 @@ User.init(
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
     },
-    firstName: {
+    name: {
       allowNull: false,
       type: DataTypes.STRING,
     },
-    lastName: {
+    email: {
       allowNull: false,
       type: DataTypes.STRING,
+      unique: true
     },
+    dateOfBirth: {
+      type: DataTypes.DATE,
+      allowNull: false
+    },
+    verified: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
+    },
+    verificationCode: {
+      type: DataTypes.STRING,
+      allowNull: true
+    }
   },
   {
     sequelize: db,

@@ -9,18 +9,31 @@ module.exports = {
         defaultValue: Sequelize.UUIDV4,
         unique: true,
       },
-      firstName: {
+      name: {
         type: Sequelize.STRING,
         allowNull: false,
         unique: true,
       },
-      lastName: {
+      email: {
         type: Sequelize.STRING,
         allowNull: false,
+        unique: true
+      },
+      dateOfBirth: {
+        type: Sequelize.DATE,
+        allowNull: false
       },
       password: {
         type: Sequelize.STRING,
         allowNull: false,
+      },
+      verified: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: false
+      },
+      verificationCode: {
+        type: Sequelize.STRING,
+        allowNull: true
       },
       createdAt: {
         allowNull: false,
