@@ -1,6 +1,6 @@
 import { isCelebrate, CelebrateInternalError } from 'celebrate';
 import { NextFunction, Request, Response } from 'express';
-import { BAD_REQUEST } from '../constants/statusCodes';
+import { BAD_REQUEST } from '../constants';
 import { responseWrapper } from '../helpers';
 
 export default () =>
