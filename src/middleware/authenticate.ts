@@ -11,8 +11,7 @@ import JwtToken from '../helpers/JWToken';
 
 interface IDecoded {
   id: string;
-  roles: string[];
-  allowAnyAdmin?: boolean;
+  email: string
 }
 
 export const checkAuth = () =>
@@ -36,9 +35,9 @@ export const checkAuth = () =>
         include: [
           {
             model: Preference,
-            as: 'role',
-          },
-        ],
+            as: "preferences"
+          }
+        ]
       });
       req.currentUser = user;
       req.body.userId = user.id
