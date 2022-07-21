@@ -1,6 +1,6 @@
 import { Model } from 'sequelize';
 import { Request as RequestType, Response as ResponseType } from 'express';
-import { User } from '../../src/database/models/member';
+import { User } from '../../src/database/models/user';
 
 export interface Request extends RequestType {
   currentUser?: User;

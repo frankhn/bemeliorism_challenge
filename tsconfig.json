@@ -12,9 +12,23 @@
     "typeRoots": [
       "node_modules/@types",
       "./types"
+    ],
+    "types": [
+      "node"
     ]
   },
   "lib": [
     "es2020"
-  ]
+  ],
+  "include": [
+    "src/**/*.ts",
+    "*.ts",
+    ".eslintrc.js",
+    "commitlint.config.js",
+    "*.js"
+  ],
+  "exclude": [
+    "build",
+    "node_modules",
+  ],
 }
