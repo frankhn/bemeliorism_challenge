@@ -8,24 +8,17 @@ import { MainController } from '../../../helpers/crudController';
 
 export class PreferenceController extends MainController {
     constructor() {
-        super(Preference, 'id', {});
+        super(Preference, 'id');
     }
 
     public getMany(req: Request, res: Response) {
         const { currentUser } = req
         return asyncWrapper(res, async () => {
-            const user = await Preference.findAll({ where: { userId: currentUser.id } })
-            if (!user) {
-                return responseWrapper({
-                    res,
-                    status: BAD_REQUEST,
-                    message: 'Invalid Request',
-                });
-            }
+            const preferences = await Preference.findAll({ where: { userId: currentUser.id } })
             return responseWrapper({
                 res,
                 status: OK,
-                data: Preference,
+                data: preferences,
             });
         });
     }

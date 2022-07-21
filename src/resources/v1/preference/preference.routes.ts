@@ -5,4 +5,4 @@ import * as validator from './preference.validation'
 
 export default Router()
     .get('/', checkAuth(), controller.getMany)
-    .post('/', checkAuth(), validator.createOne, controller.createOne)
+    .post('/', validator.createOne, checkAuth(), controller.createOne)
