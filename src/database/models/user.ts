@@ -1,9 +1,11 @@
 import {
   Model,
   DataTypes,
+  Association,
 } from 'sequelize';
 import db from '.';
 import Encrypt from '../../helpers/encryption'
+import { Preference } from './preference';
 
 export class User extends Model {
   public id: string;
@@ -14,18 +16,21 @@ export class User extends Model {
   public verificationCode: string
   public dateOfBirth: Date
 
+  public readonly preferences?: Preference[];
   public readonly createdAt: Date
   public readonly updatedAt: Date
 
   public static associations: {
-
+    preferences: Association<User, Preference>;
   };
 
 
   toJSON() {
     return {
       ...this.get(),
-      password: undefined
+      password: undefined,
+      verificationCode: undefined,
+      verified: undefined
     };
   }
 }
@@ -48,6 +53,10 @@ User.init(
     },
     dateOfBirth: {
       type: DataTypes.DATE,
+      allowNull: false
+    },
+    password: {
+      type: DataTypes.STRING,
       allowNull: false
     },
     verified: {

@@ -14,14 +14,10 @@ export class Preference extends Model {
     public readonly createdAt: Date
     public readonly updatedAt: Date
 
-    public static associations: {
-
-    };
-
-
     toJSON() {
         return {
             ...this.get(),
+            userId: undefined
         };
     }
 }
@@ -48,10 +44,9 @@ Preference.init(
     },
     {
         sequelize: db,
-        modelName: 'user',
+        modelName: 'preference',
         timestamps: true,
-        paranoid: true,
-        tableName: 'users',
+        tableName: 'preferences',
     },
 );
 
